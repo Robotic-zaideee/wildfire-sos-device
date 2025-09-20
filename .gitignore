@@ -1,0 +1,20 @@
+# Compiled files
+*.bin
+*.elf
+*.hex
+*.o
+*.a
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Build and cache folders
+build/
+dist/
+.cache/
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.swp
