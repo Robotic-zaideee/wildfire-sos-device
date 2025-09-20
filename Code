@@ -1,1 +1,34 @@
 
+/* device_code.ino
+   Basic fire detection + water pump control
+   Hardware:
+   - Flame sensor (digital output) on pin 2
+   - Relay module on pin 5
+   - Water pump connected to relay
+*/
+
+int flamePin = 2;       // Flame sensor (digital output)
+int pumpRelay = 5;      // Relay controlling pump
+
+void setup() {
+  pinMode(flamePin, INPUT);
+  pinMode(pumpRelay, OUTPUT);
+  digitalWrite(pumpRelay, LOW);  // Ensure pump is off at start
+  Serial.begin(9600);
+}
+
+void loop() {
+  int fire = digitalRead(flamePin);
+
+  if (fire == LOW) { // Fire detected (most flame sensors output LOW when fire is present)
+    Serial.println("🔥 Fire detected! Pump ON");
+    digitalWrite(pumpRelay, HIGH); // Turn on pump
+    delay(10000); // Run pump for 10 seconds (adjust as needed)
+    digitalWrite(pumpRelay, LOW);  // Turn off pump
+  } else {
+    Serial.println("✅ No fire detected");
+    digitalWrite(pumpRelay, LOW);  // Keep pump off
+  }
+
+  delay(500); // Sensor check every 0.5s
+}
